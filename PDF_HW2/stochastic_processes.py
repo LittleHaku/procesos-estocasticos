@@ -109,10 +109,10 @@ def animate_simulation_distribution(W, x0, t0, T, num_frames):
     fig, ax = plt.subplots()
     bins = 30
     # Inicializar el histograma
-    hist = ax.hist(W[:, 0], bins=bins, density=True, alpha=0.6, color='g')
+    _ = ax.hist(W[:, 0], bins=bins, density=True, alpha=0.6, color='g', label='Histograma Empírico')
     x = np.linspace(np.min(W), np.max(W), 1000)
     pdf = norm.pdf(x, loc=x0, scale=np.sqrt(t_grid[0] - t0))
-    line, = ax.plot(x, pdf, 'r-', lw=2, label='Densidad Teórica')
+    _,  = ax.plot(x, pdf, 'r-', lw=2, label='Densidad Teórica')
     ax.set_xlabel('B(t)')
     ax.set_ylabel('Densidad')
     ax.set_title(f'Evolución de la Distribución de B(t) en t={t_grid[0]:.2f}')
@@ -123,7 +123,7 @@ def animate_simulation_distribution(W, x0, t0, T, num_frames):
         ax.cla()
         current_t = t_grid[frame]
         current_data = W[:, indices[frame]]
-        ax.hist(current_data, bins=bins, density=True, alpha=0.6, color='g')
+        ax.hist(current_data, bins=bins, density=True, alpha=0.6, color='g', label='Histograma Empírico')
         pdf = norm.pdf(x, loc=x0, scale=np.sqrt(current_t - t0))
         ax.plot(x, pdf, 'r-', lw=2, label='Densidad Teórica')
         ax.set_xlabel('B(t)')
@@ -135,3 +135,21 @@ def animate_simulation_distribution(W, x0, t0, T, num_frames):
     ani = animation.FuncAnimation(fig, update, frames=num_frames, repeat=False)
     plt.close(fig)
     return ani
+
+def simulate_brownian_bridge(T, M, N):
+    """
+    Simula un puente browniano.
+
+    Args:
+        T (float): Tiempo final.
+        M (int): Número de simulaciones.
+        N (int): Número de pasos.
+
+    Returns:
+        np.ndarray: Simulaciones del puente browniano.
+    """
+    W = simulate_wiener_process(T, 0, M, N)
+    t_values = np.linspace(0, T, N + 1)
+    W_T = W[:, -1]
+    BB = W - np.outer(W_T, t_values / T)
+    return BB
