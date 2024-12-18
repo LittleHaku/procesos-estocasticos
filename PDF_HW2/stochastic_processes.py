@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import norm
+import matplotlib.animation as animation
 
 def simulate_wiener_process(T, W0, M, N):
     """Simula un proceso de Wiener.
@@ -88,3 +89,49 @@ def estimate_autocovariance(W, t_values, fixed_s):
     """
     W_s = W[:, np.argmin(np.abs(t_values - fixed_s))]
     return np.mean(W * W_s[:, np.newaxis], axis=0)
+
+
+def animate_simulation_distribution(W, x0, t0, T, num_frames):
+    """
+    Crea una animación de la evolución de la distribución de un proceso.
+
+    Args:
+        W (numpy.ndarray): Simulaciones del proceso de Wiener.
+        x0 (float): Valor inicial B(t0).
+        t0 (float): Tiempo inicial.
+        T (float): Duración del intervalo de simulación.
+        num_frames (int): Número de cuadros en la animación.
+    """
+    t_grid = np.linspace(t0, t0 + T, num_frames)
+    N = W.shape[1] - 1
+    indices = np.linspace(0, N, num_frames, dtype=int)
+
+    fig, ax = plt.subplots()
+    bins = 30
+    # Inicializar el histograma
+    hist = ax.hist(W[:, 0], bins=bins, density=True, alpha=0.6, color='g')
+    x = np.linspace(np.min(W), np.max(W), 1000)
+    pdf = norm.pdf(x, loc=x0, scale=np.sqrt(t_grid[0] - t0))
+    line, = ax.plot(x, pdf, 'r-', lw=2, label='Densidad Teórica')
+    ax.set_xlabel('B(t)')
+    ax.set_ylabel('Densidad')
+    ax.set_title(f'Evolución de la Distribución de B(t) en t={t_grid[0]:.2f}')
+    ax.legend()
+    ax.grid(True)
+
+    def update(frame):
+        ax.cla()
+        current_t = t_grid[frame]
+        current_data = W[:, indices[frame]]
+        ax.hist(current_data, bins=bins, density=True, alpha=0.6, color='g')
+        pdf = norm.pdf(x, loc=x0, scale=np.sqrt(current_t - t0))
+        ax.plot(x, pdf, 'r-', lw=2, label='Densidad Teórica')
+        ax.set_xlabel('B(t)')
+        ax.set_ylabel('Densidad')
+        ax.set_title(f'Evolución de la Distribución de B(t) en t={current_t:.2f}')
+        ax.legend()
+        ax.grid(True)
+
+    ani = animation.FuncAnimation(fig, update, frames=num_frames, repeat=False)
+    plt.close(fig)
+    return ani
