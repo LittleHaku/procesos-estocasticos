@@ -17,7 +17,7 @@ donde $d_i$ es el grado del nodo $i$, $n$ es el número total de nodos, y $\alph
 ## Procedimiento
 
 1. **Estudio inicial de fracción visitada en función del tiempo**:
-   Para comenzar, se simularon paseos en un grafo de tipo Barabasi-Albert con los siguientes parámetros iniciales: $n = 1000$ nodos, $m = 10$ enlaces por nodo añadido, y un límite temporal de $t_{\text{max}} = 5000$. Los valores de $\alpha$ considerados inicialmente fueron $\{-2, -1, -0.5, 0, 0.5, 1, 2, 5\}$. Se realizaron $n_{\text{tests}} = 1000$ pruebas para cada valor de $\alpha$, calculando la fracción promedio de nodos visitados en función del tiempo. Esto, nos permitió identificar las tendencias generales en el comportamiento del paseo para diferentes configuraciones.
+   Para comenzar, se simularon paseos en un grafo de tipo Barabasi-Albert con los siguientes parámetros iniciales: $n = 1000$ nodos, $m = 10$ enlaces por nodo añadido, y un límite temporal de $t_{\text{max}} = 5000$. Los valores de $\alpha$ considerados inicialmente fueron $\{-2, -1, -0.5, 0, 0.5, 1, 2, 5\}$. Se realizaron $n_{\text{tests}} = 1000$ pruebas para cada valor de $\alpha$, calculando la fracción promedio de nodos visitados en función del tiempo. Esto permitió identificar las tendencias generales en el comportamiento del paseo para diferentes configuraciones.
 
 2. **Ampliación del rango de valores de $\alpha$**:
    Basándose en los resultados iniciales, se amplió el rango de estudio para incluir valores intermedios ($\alpha = -0.25$, $-0.75$, $-1.5$) y extremos ($\alpha = -4$). Esto permitió refinar el análisis y explorar cómo valores menos comunes impactan la eficiencia del paseo.
@@ -46,7 +46,7 @@ donde $d_i$ es el grado del nodo $i$, $n$ es el número total de nodos, y $\alph
 
 ### Tiempo Promedio para Alcanzar el 50% del Grafo
 
-Para complementar el análisis anterior, se calculó el tiempo promedio necesario para visitar el 50% del grafo para cada valor de $\alpha$, esto nos permite evaluar los valores de $\alpha$ que logran un mejor equilibrio.
+Para complementar el análisis anterior, se calculó el tiempo promedio necesario para visitar el 50% del grafo para cada valor de $\alpha$, esto permitió evaluar los valores de $\alpha$ que logran un mejor equilibrio.
 
 ![Tiempo Promedio para Alcanzar el 50% del Grafo](graficas/grafica3.png)
 
@@ -65,6 +65,4 @@ Además, el análisis sugiere que valores extremos, tanto altos como bajos, tien
 
 ## Referencias
 
-[1]: https://en.wikipedia.org/wiki/Barab%C3%A1si%E2%80%93Albert_model
-
-1: [Wikipedia. Barabási–Albert model.](https://en.wikipedia.org/wiki/Barab%C3%A1si%E2%80%93Albert_model)
+[1]: [Wikipedia. Barabási–Albert model.](https://en.wikipedia.org/wiki/Barab%C3%A1si%E2%80%93Albert_model)
