@@ -1,5 +1,7 @@
 # Parte B: Análisis del Paseo por Popularidad en Grafos Barabasi-Albert
 
+- **Autor**: Iván Sotillo del Horno
+
 En esta segunda parte del examen, se analiza el comportamiento de un paseo por popularidad en un grafo generado bajo el modelo Barabasi-Albert. Este modelo es conocido por generar grafos con propiedades de escala libre, donde unos pocos nodos concentran la mayoría de las conexiones (alta popularidad), mientras que la mayoría de los nodos tienen un grado mucho menor. Esta estructura es común en redes sociales, biológicas y tecnológicas [1].
 
 El objetivo inicial de este estudio es analizar la fracción del grafo visitada en función del tiempo para diversos valores del parámetro $\alpha$. Este parámetro modula la probabilidad de transición en el paseo, definida matemáticamente como:
@@ -31,7 +33,7 @@ donde $d_i$ es el grado del nodo $i$, $n$ es el número total de nodos, y $\alph
 
 #### Valores Iniciales de $\alpha$
 
-![Fracción Visitada en Función del Tiempo1](graficas/grafica1.png)
+![Fracción Visitada en Función del Tiempo 1](graficas/grafica1.png)
 
 - Para valores altos de $\alpha$ ($\alpha > 1$), el paseo se concentra en unos pocos nodos de alto grado, los denominados "populares", lo que resulta en una exploración limitada del grafo y una fracción visitada baja.
 - Valores bajos de $\alpha$ ($\alpha < -1$) también presentan un comportamiento subóptimo, ya que la probabilidad asignada a cada nodo tiende a ser uniforme y baja, ralentizando la exploración.
@@ -39,7 +41,7 @@ donde $d_i$ es el grado del nodo $i$, $n$ es el número total de nodos, y $\alph
 
 #### Valores Adicionales de $\alpha$
 
-![Fracción Visitada en Función del Tiempo2](graficas/grafica2.png)
+![Fracción Visitada en Función del Tiempo 2](graficas/grafica2.png)
 
 - Al ampliar el rango de $\alpha$ hacia valores extremos ($\alpha = -4$), se observó que el rendimiento disminuye considerablemente debido a que la probabilidad de transición se concentra en nodos de bajo grado, perjudicando la eficiencia.
 - Valores intermedios como $\alpha = -0.75$ y $\alpha = -0.25$ destacaron por su rendimiento, maximizando la exploración en menor tiempo. En particular, $\alpha = -0.75$ sobresalió como el mejor valor.
